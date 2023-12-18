@@ -24,8 +24,7 @@
       "createStartMenuShortcut": false,
       "shortcutName": "进程调度可视化"
     },
-    "productName": "进程调度可视化",
-    "copyright": "刘宇阳2020401387 Copyright © 2022"
+    "productName": "进程调度可视化"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.2",
