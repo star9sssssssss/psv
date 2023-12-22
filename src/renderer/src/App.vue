@@ -185,13 +185,13 @@ const deviceArrive = (message) => {
 //阻塞当前运行进程
 const doBlock1 = () => {
   const runProcess = context.value.runQueue[0];
-  if (runProcess.IoReq !== null && runProcess.IoReq !== undefined) {
+  if (runProcess.IoReq !== null && runProcess.IoReq !== undefined) { // 先判断当前进程是否已经在使用设备
     if (runProcess.IoReq.runTime !== 0) {
       deviceLack(`进程 ${runProcess.name} 正在使用设备 ${runProcess.IoReq.device}`);
       return;
     }
   }
-  const IoReq = new IoRequest(form.name, form.time);
+  const IoReq = new IoRequest(form.name, form.time); // 发送IO请求
   for (let device of deviceList) {
     if (device.name === IoReq.device) { // 找到设备
       let number = device.number;
@@ -209,7 +209,6 @@ const doBlock1 = () => {
           // TODO
           if (device.name === "printer") waitDeviceList.value.push(item)
           else waitDeviceList1.value.push(item)
-
           if (record !== null) {
             const re = {
               "change" : "运行 => 阻塞",
@@ -304,7 +303,6 @@ const initData = [
     ],
   },
 ]
-
 
 //先来先服务算法对象
 const FCFS = {
@@ -456,7 +454,7 @@ const context = ref({
     context.value.finishQueue = [];
     context.value.passTime = 0;
     context.value.processNum = 0;
-    // context.value.globalTaskTimer = null;
+    context.value.globalTaskTimer = null;
     context.value.schedulingAlgorithm = null;
     selectedSchedulingAlgorithIndex.value = 0;
     RR_timeSlice.value = 1;
@@ -653,10 +651,10 @@ const start = () => {
   }
 }
 
-
 const pause = () => {
   context.value.globalStatus = 2;
 }
+
 const continuee = () => {
   context.value.globalStatus = 1;
   context.value.globalTaskTimer = setTimeout(() => {
@@ -664,6 +662,7 @@ const continuee = () => {
     doTimingGlobalTask();
   }, 1000)
 }
+
 const end = () => {
   context.value.globalStatus = 0;
   deviceList.forEach(device => {
@@ -675,12 +674,12 @@ const end = () => {
   pro_record.value.clear();
   context.value.clear();
 }
+
 const next = () => {
   changeState();
 }
 
 const selectedBlockProcessIndex = ref([]);
-
 const schedulingAlgorithms = [
   {
     name: "先来先服务",
@@ -885,7 +884,10 @@ const getPro = (idx, name) => {
                     width="300"
                   >
                     <template v-slot="{ row }">
-                      <div :class="getClass(row.value['change'])" style="line-height: 65px; color:white;" >{{ row.value["change"] }}</div>
+                      <div :class="getClass(row.value['change'])" style="line-height: 65px; color:white;" >
+                        {{ row.value["change"] }}
+<!--/*                        <span style="width: 60px;height: 50px;background-color: red;display: inline-block;"> {{row.value["change"].substring(0, 2)}} </span> => <span> {{row.value["change"].substring(6)}} </span>-->
+                      </div>
                     </template>
                   </el-table-column>
                   <el-table-column
@@ -1526,7 +1528,6 @@ const getPro = (idx, name) => {
     </table>
   </div>
 </template>
-
 
 <style lang="less">
 /* @import './assets/css/styles.less'; */

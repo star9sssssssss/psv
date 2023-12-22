@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "一个用electron-vite写的进程调度可视化作业",
   "main": "./out/main/index.js",
-  "author": "2020401387刘宇阳",
   "homepage": "https://www.electronjs.org",
   "scripts": {
     "format": "prettier --write .",
