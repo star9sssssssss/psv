@@ -1,7 +1,7 @@
 {
   "name": "process-scheduling-visualization",
   "version": "1.0.0",
-  "description": "一个用electron-vite写的进程调度可视化作业",
+  "description": "进程调度可视化",
   "main": "./out/main/index.js",
   "homepage": "https://www.electronjs.org",
   "scripts": {
